@@ -1,0 +1,25 @@
+{% extends 'generic.html' %}
+
+{% block title %}Товар -- {{ tovar.title }}{% endblock %}
+{% block header %}{{ tovar.title }}{% endblock %}
+
+{% block contents %}
+<table border="1">
+ <tr><td>Наименование</td><td>{{ tovar.title }}</td></tr>
+ <tr><td>Артикул</td><td>{{ tovar.article }}</td></tr>
+ <tr><td>В наличии</td><td>{{ tovar.quantity}}</td></tr>
+ <tr><td>Описание</td><td>{{ tovar.description }}</td></tr>
+ <tr><td>Группа</td><td>{{ tovar.group.title }}</td></tr>
+ <tr><td>Теги</td><td>{{ tags }}</td></tr>
+</table>
+
+<p>Временно</p>
+<ul>
+ {% for tag in tovar.tags.all %}
+ <li>{{ tag.title }}</li>
+ {% endfor %}
+</ul>
+
+{% endblock %}
+
+    

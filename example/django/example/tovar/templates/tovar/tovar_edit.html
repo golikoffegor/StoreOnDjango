@@ -1,0 +1,46 @@
+{% extends 'generic.html' %}
+
+{% block title %}Товар -- {{ tovar.title }}{% endblock %}
+{% block header %}{{ tovar.title }}{% endblock %}
+
+{% block contents %}
+
+<p>Запрошено методом {{ request.method }}</p>
+
+<p>Сырые данные: {{ raw_data }}</p>
+
+
+<form method="POST" action="">{% csrf_token %}
+
+ <table border="1">
+  <tr><td>{{ form.non_field_errors }}</td><tr>
+  <tr>
+   <td>Наименование</td>
+   <td>{{ form.title }}</td>
+   <td>{{ form.title.errors }}</td>
+  </tr>
+  <tr>
+   <td>Артикул</td>
+   <td>{{ form.article }}</td>
+   <td>{{ form.article.errors }}</td>
+  </tr>
+  <tr>
+   <td>В наличии</td>
+   <td>{{ form.quantity }}</td>
+   <td>{{ form.quantity.errors }}</td>
+  </tr>
+  <tr>
+   <td>Описание</td>
+   <td>{{ form.description }}</td>
+   <td>{{ form.description.errors }}</td>
+  </tr>
+  <tr>
+   <td>&nbsp;</td>
+   <td>
+    <input type="submit" />
+    <input type="reset" />
+   </td>
+  </tr>
+ </table>
+</form>
+{% endblock %}

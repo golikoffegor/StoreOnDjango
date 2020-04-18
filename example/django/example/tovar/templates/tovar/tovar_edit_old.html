@@ -1,0 +1,28 @@
+{% extends 'generic.html' %}
+
+{% block title %}Товар -- {{ tovar.title }}{% endblock %}
+{% block header %}{{ tovar.title }}{% endblock %}
+
+{% block contents %}
+
+<p>Запрошено методом {{ request.method }}</p>
+
+<p>Сырые данные: {{ raw_data }}</p>
+
+<form method="POST" action="">{% csrf_token %}
+
+ <table border="1">
+  <tr>
+   <td><label for"title">Наименование</label></td>
+   <td><input id="title" type="text" name="title" /></td>
+  </tr>
+  <tr>
+   <td><label for="quantity">В наличии</label></td>
+   <td><input id="quantity" type="text" name="quantity" /></td>
+  </tr>
+ </table>
+
+ <input type="submit" />
+ <input type="reset" />
+</form>
+{% endblock %}

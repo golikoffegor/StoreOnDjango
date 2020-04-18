@@ -1,0 +1,37 @@
+{% extends 'generic.html'%}
+
+{%block title %}Список товаров{% endblock %}
+{% block header%}Список товаров{% endblock %}
+
+{% block contents %}
+<table border="1">
+ <tr>
+  <th>Артикул</th>
+  <th>Наименование</th>
+  <th>Наличие</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
+ </tr>
+ {% for t in all_tovars %}
+ <tr>
+  <td>{{ t.article  }}</td>   <!-- Артикул      -->
+  <td>{{ t.title    }}</td>   <!-- Наименование -->
+  <td>{{ t.quantity }}</td>   <!-- Наличие      -->
+  <td>
+      {% for tag in t.tags.all|slice:':5' %}
+        {{ tag.title }}
+      {% endfor %}
+  </td>
+  <td><a href="{% url 'tovar:tags'   t.pk %}">Теги</a></td>
+  <td><a href="{% url 'tovar:show'   t.pk %}">Просмотр</a></td>
+  <td><a href="{% url 'tovar:edit'   t.pk %}">Редактирование</a></td>
+  <td><a href="{% url 'tovar:delete' t.pk %}">Удалить</a></td>
+  <td><a href="{% url 'tovar:add_picture' t.pk %}">Добавить картинку</a></td>
+  <td><img src="{% url 'tovar:picture' t.pk %}" alt="картинка" /></td>
+ </tr>
+ {% endfor %}
+</table>
+
+<p><a href="{% url 'tovar:create' %}">Новый товар</a></p>
+
+{% endblock %}

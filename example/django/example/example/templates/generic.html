@@ -1,0 +1,55 @@
+{% load static %}
+
+<html>
+ <head>
+  <title>{% block title %}Наш магазин{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'mystyle.css' %}" />
+ </head>
+ <body>
+    
+ <!-- Main menu -->
+ <table>
+  <tr>
+   <td><a href="{% url 'home:index' %}">Начало</a></td>
+   <td><a href="{% url 'tovar:index' %}">Товары</a></td>
+   <td><a href="{% url 'tovar:allgroups' %}">Группы</a></td>
+  </tr>
+ </table>
+ <!-- End of main menu -->
+    
+ <!-- Main title -->
+ <table width="100%" border="1">
+  <tr>
+   <td><h1>{% block header %}Наш крутой магазин{% endblock %}</h1></td>
+   <td></td>
+   <td>
+     {% if request.user.is_authenticated %}
+       <p>Hello, {{ request.user.username }}</p>
+       <p><a href="{% url 'home:logout_user' %}">Выход</a></p>
+     {% else %}
+       <form method="POST" action="{% url 'home:login' %}">{% csrf_token %}
+         <table>
+           <tr><td>Логин</td><td><input type="text" name="login"/></td></tr>
+           <tr><td>Пароль</td><td><input type="password" name="password"/></td></tr>
+           <tr><td>&nbsp;</td><td><input type="submit" value="Войти"/></td></tr>
+         </table>
+       </form>
+     {% endif %}
+   </td>
+ </table>
+ <!-- End of main title -->
+    
+ <div id="contents">
+ <!-- Contents -->
+ {% block contents %}
+ <ul>
+  {% for perm in request.user.user_permissions.all %}
+  <li>{{ perm.codename }}</li>
+  {% endfor %}
+ </ul>
+ {% endblock %}
+ <!-- End of contents -->
+ </div>
+    
+ </body>
+</html>

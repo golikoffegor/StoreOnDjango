@@ -1,0 +1,7 @@
+body {
+    background: url("/static/pale-taupe-oblique-lines.png");
+}
+
+.errorlist {
+    color: red;
+}
